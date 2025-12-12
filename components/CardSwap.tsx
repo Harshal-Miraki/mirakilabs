@@ -173,7 +173,9 @@ const CardSwap: React.FC<CardSwapProps> = ({
       if (node) {
         const pause = () => {
           tlRef.current?.pause();
-          clearInterval(intervalRef.current);
+          if (intervalRef.current !== null) {
+            clearInterval(intervalRef.current);
+          }
         };
         const resume = () => {
           tlRef.current?.play();
