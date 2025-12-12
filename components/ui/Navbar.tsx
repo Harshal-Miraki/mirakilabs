@@ -364,17 +364,16 @@ export function Navbar() {
                             <NavigationMenuItem key={menuItem.title}>
                                 {/* Direct link items (like Contact) */}
                                 {menuItem.type === "link" && menuItem.href ? (
-                                    <Link href={menuItem.href} legacyBehavior passHref>
-                                        <NavigationMenuLink
-                                            className={cn(
-                                                navigationMenuTriggerStyle(),
-                                                "bg-transparent text-base font-medium transition-all duration-200",
-                                                "hover:bg-linear-to-br hover:from-brand-blue/10 hover:to-brand-green/10 hover:text-brand-blue rounded-full px-4 py-2"
-                                            )}
-                                        >
-                                            {menuItem.title}
-                                        </NavigationMenuLink>
-                                    </Link>
+                                    <NavigationMenuLink
+                                        href={menuItem.href}
+                                        className={cn(
+                                            navigationMenuTriggerStyle(),
+                                            "bg-transparent text-base font-medium transition-all duration-200",
+                                            "hover:bg-linear-to-br hover:from-brand-blue/10 hover:to-brand-green/10 hover:text-brand-blue rounded-full px-4 py-2"
+                                        )}
+                                    >
+                                        {menuItem.title}
+                                    </NavigationMenuLink>
                                 ) : (
                                     /* Dropdown menu items */
                                     <>
@@ -466,7 +465,7 @@ export function Navbar() {
 
                                                         if (hasSubItems) {
                                                             return (
-                                                                <li key={item.title} className="col-span-1 list-none">
+                                                                <div key={item.title} className="col-span-1">
                                                                     <Link
                                                                         href={item.href}
                                                                         className="flex items-start gap-4 p-4 rounded-lg transition-all duration-200 group hover:bg-linear-to-br hover:from-brand-blue/10 hover:to-brand-green/10"
@@ -489,7 +488,7 @@ export function Navbar() {
                                                                         {item.subItems.map((subItem) => {
                                                                             const SubIcon = subItem.icon;
                                                                             return (
-                                                                                <li key={subItem.title}>
+                                                                                <li key={subItem.title} className="list-none">
                                                                                     <NavigationMenuLink asChild>
                                                                                         <a
                                                                                             href={subItem.href}
@@ -514,12 +513,12 @@ export function Navbar() {
                                                                             );
                                                                         })}
                                                                     </ul>
-                                                                </li>
+                                                                </div>
                                                             );
                                                         }
 
                                                         return (
-                                                            <li key={item.title} className="col-span-1 list-none">
+                                                            <div key={item.title} className="col-span-1">
                                                                 <NavigationMenuLink asChild>
                                                                     <a
                                                                         href={item.href}
@@ -540,7 +539,7 @@ export function Navbar() {
                                                                         </div>
                                                                     </a>
                                                                 </NavigationMenuLink>
-                                                            </li>
+                                                            </div>
                                                         );
                                                     })}
                                                 </div>

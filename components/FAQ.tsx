@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import GradientText from "./GradientText";
 import {
     Accordion,
@@ -61,6 +62,12 @@ const faqIcons = {
 };
 
 export function FAQ() {
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     return (
         <section className="py-24 relative overflow-hidden">
             {/* Background Elements */}
@@ -104,78 +111,82 @@ export function FAQ() {
                         transition={{ duration: 0.6 }}
                         className="relative flex items-center justify-center h-[400px] md:h-[450px]"
                     >
-                        {/* Orbit Paths */}
-                        <div className="absolute w-[200px] h-[200px] rounded-full border border-black/10 dark:border-white/10" />
-                        <div className="absolute w-[320px] h-[320px] rounded-full border border-black/10 dark:border-white/10" />
+                        {mounted && (
+                            <>
+                                {/* Orbit Paths */}
+                                <div className="absolute w-[200px] h-[200px] rounded-full border border-black/10 dark:border-white/10" />
+                                <div className="absolute w-[320px] h-[320px] rounded-full border border-black/10 dark:border-white/10" />
 
-                        {/* Center - Company Logo */}
-                        <div className="absolute z-10 flex items-center justify-center w-28 h-28 rounded-full bg-white dark:bg-zinc-900 shadow-2xl border border-black/5 dark:border-white/10">
-                            <img
-                                src="/assets/miraki-logo.png"
-                                alt="Miraki Labs"
-                                className="w-20 h-20 object-contain"
-                            />
-                        </div>
+                                {/* Center - Company Logo */}
+                                <div className="absolute z-10 flex items-center justify-center w-28 h-28 rounded-full bg-white dark:bg-zinc-900 shadow-2xl border border-black/5 dark:border-white/10">
+                                    <img
+                                        src="/assets/miraki-logo.png"
+                                        alt="Miraki Labs"
+                                        className="w-20 h-20 object-contain"
+                                    />
+                                </div>
 
-                        {/* Inner Orbiting Icons */}
-                        <div
-                            className="absolute w-[200px] h-[200px]"
-                            style={{
-                                animation: "spin 20s linear infinite",
-                            }}
-                        >
-                            {faqIcons.inner.map((item, index) => {
-                                const angle = (360 / 3) * index;
-                                const radian = (angle * Math.PI) / 180;
-                                const x = 100 * Math.cos(radian);
-                                const y = 100 * Math.sin(radian);
-                                const IconComponent = item.Icon;
-                                return (
-                                    <div
-                                        key={index}
-                                        className="absolute w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-zinc-800 shadow-lg border border-black/10 dark:border-white/20"
-                                        style={{
-                                            left: `calc(50% + ${x}px - 24px)`,
-                                            top: `calc(50% + ${y}px - 24px)`,
-                                            animation: "spin 20s linear infinite reverse",
-                                        }}
-                                        title={item.label}
-                                    >
-                                        <IconComponent className={`w-6 h-6 ${item.color}`} />
-                                    </div>
-                                );
-                            })}
-                        </div>
+                                {/* Inner Orbiting Icons */}
+                                <div
+                                    className="absolute w-[200px] h-[200px]"
+                                    style={{
+                                        animation: "spin 20s linear infinite",
+                                    }}
+                                >
+                                    {faqIcons.inner.map((item, index) => {
+                                        const angle = (360 / 3) * index;
+                                        const radian = (angle * Math.PI) / 180;
+                                        const x = 100 * Math.cos(radian);
+                                        const y = 100 * Math.sin(radian);
+                                        const IconComponent = item.Icon;
+                                        return (
+                                            <div
+                                                key={index}
+                                                className="absolute w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-zinc-800 shadow-lg border border-black/10 dark:border-white/20"
+                                                style={{
+                                                    left: `calc(50% + ${x}px - 24px)`,
+                                                    top: `calc(50% + ${y}px - 24px)`,
+                                                    animation: "spin 20s linear infinite reverse",
+                                                }}
+                                                title={item.label}
+                                            >
+                                                <IconComponent className={`w-6 h-6 ${item.color}`} />
+                                            </div>
+                                        );
+                                    })}
+                                </div>
 
-                        {/* Outer Orbiting Icons */}
-                        <div
-                            className="absolute w-[320px] h-[320px]"
-                            style={{
-                                animation: "spin 30s linear infinite reverse",
-                            }}
-                        >
-                            {faqIcons.outer.map((item, index) => {
-                                const angle = (360 / 4) * index;
-                                const radian = (angle * Math.PI) / 180;
-                                const x = 160 * Math.cos(radian);
-                                const y = 160 * Math.sin(radian);
-                                const IconComponent = item.Icon;
-                                return (
-                                    <div
-                                        key={index}
-                                        className="absolute w-14 h-14 flex items-center justify-center rounded-full bg-white dark:bg-zinc-800 shadow-lg border border-black/10 dark:border-white/20"
-                                        style={{
-                                            left: `calc(50% + ${x}px - 28px)`,
-                                            top: `calc(50% + ${y}px - 28px)`,
-                                            animation: "spin 30s linear infinite",
-                                        }}
-                                        title={item.label}
-                                    >
-                                        <IconComponent className={`w-7 h-7 ${item.color}`} />
-                                    </div>
-                                );
-                            })}
-                        </div>
+                                {/* Outer Orbiting Icons */}
+                                <div
+                                    className="absolute w-[320px] h-[320px]"
+                                    style={{
+                                        animation: "spin 30s linear infinite reverse",
+                                    }}
+                                >
+                                    {faqIcons.outer.map((item, index) => {
+                                        const angle = (360 / 4) * index;
+                                        const radian = (angle * Math.PI) / 180;
+                                        const x = 160 * Math.cos(radian);
+                                        const y = 160 * Math.sin(radian);
+                                        const IconComponent = item.Icon;
+                                        return (
+                                            <div
+                                                key={index}
+                                                className="absolute w-14 h-14 flex items-center justify-center rounded-full bg-white dark:bg-zinc-800 shadow-lg border border-black/10 dark:border-white/20"
+                                                style={{
+                                                    left: `calc(50% + ${x}px - 28px)`,
+                                                    top: `calc(50% + ${y}px - 28px)`,
+                                                    animation: "spin 30s linear infinite",
+                                                }}
+                                                title={item.label}
+                                            >
+                                                <IconComponent className={`w-7 h-7 ${item.color}`} />
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </>
+                        )}
                     </motion.div>
 
                     {/* Right Side - Accordion */}
