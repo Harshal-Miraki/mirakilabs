@@ -186,11 +186,17 @@ const CardSwap: React.FC<CardSwapProps> = ({
         return () => {
           node.removeEventListener('mouseenter', pause);
           node.removeEventListener('mouseleave', resume);
-          clearInterval(intervalRef.current);
+          if (intervalRef.current !== null) {
+            clearInterval(intervalRef.current);
+          }
         };
       }
     }
-    return () => clearInterval(intervalRef.current);
+    return () => {
+      if (intervalRef.current !== null) {
+        clearInterval(intervalRef.current);
+      }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing]);
 
